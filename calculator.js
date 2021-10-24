@@ -3,11 +3,14 @@ let userInput = "";
 let result;
 let num1;
 let num2;
+let potentialNumber;
 
 function operate() {
 
+    potentialNumber = userInput;
+
     if (num2 == undefined) {
-        num2 = userInput;
+        num2 = potentialNumber;
     }
 
     num1 = parseFloat(num1);
@@ -27,92 +30,116 @@ function operate() {
      textBox.textContent = result;
      num1 = undefined;
      num2 = undefined;
-     userInput = result;
-
-     if (typeof userInput == "number") {
-        userInput = userInput.toString(); // find out how to convert a string properly david wtf..
-    }
-    //  num1 = userInput;
-     //console.log(result);
+     potentialNumber = result;
+     userInput = "";
 }
 
 function addition() {
+    potentialNumber = userInput;
+
     if (num1 == undefined) {
-        num1 = userInput;
+        num1 = potentialNumber;
     } else {
-        num2 = userInput;
+        num2 = potentialNumber;
     }
 
-    userCalculations.textContent += " + " + userInput;
+    if (operator !== undefined) {
+        userCalculations.textContent += " " + operator + " " + potentialNumber;
+    }   else {
+        userCalculations.textContent += potentialNumber;
+    }
 
     if (num1 !== undefined && num2 !== undefined) {
         operate();
-    } else {
-        userInput = "";
+    } else if (num1 !== undefined && result !== undefined) {
+        num2 = result;
+        operate();
     }
 
-    if (typeof userInput == "number") {
-        userInput = userInput.toString(); // find out how to convert a string properly david wtf..
-    }
-
+    userInput = "";
     textBox.textContent = "";
     operator = "+";
-
-    
 }
 
 function subtraction() {
+    potentialNumber = userInput;
+
     if (num1 == undefined) {
-        num1 = userInput;
+        num1 = potentialNumber;
     } else {
-        num2 = userInput;
+        num2 = potentialNumber;
+    }
+
+    if (operator !== undefined) {
+        userCalculations.textContent += " " + operator + " " + potentialNumber;
+    }   else {
+        userCalculations.textContent += potentialNumber;
     }
 
     if (num1 !== undefined && num2 !== undefined) {
         operate();
-    } else {
-        userInput = "";
-        textBox.textContent = "";
-        
+    } else if (num1 !== undefined && result !== undefined) {
+        num2 = result;
+        operate();
     }
+
+    userInput = "";
+    textBox.textContent = "";
     return operator = "-";
-    //result = num1 - num2;
 }
 
 function multiply() {
+    potentialNumber = userInput;
+
     if (num1 == undefined) {
-        num1 = userInput;
+        num1 = potentialNumber;
     } else {
-        num2 = userInput;
+        num2 = potentialNumber;
+    }
+
+    if (operator !== undefined) {
+        userCalculations.textContent += " " + operator + " " + potentialNumber;
+    }   else {
+        userCalculations.textContent += potentialNumber;
     }
 
     if (num1 !== undefined && num2 !== undefined) {
         operate();
-    } else {
-        userInput = "";
-        textBox.textContent = "";
-        
+    } else if (num1 !== undefined && result !== undefined) {
+        num2 = result;
+        operate();
     }
+
+    userInput = "";
+    textBox.textContent = "";
     return operator = "*";
-    //result = num1 * num2;
 }
 
 function divide() {
+    potentialNumber = userInput;
+
     if (num1 == undefined) {
-        num1 = userInput;
+        num1 = potentialNumber;
     } else {
-        num2 = userInput;
+        num2 = potentialNumber;
+    }
+
+    if (operator !== undefined) {
+        userCalculations.textContent += " " + operator + " " + potentialNumber;
+    }   else {
+        userCalculations.textContent += potentialNumber;
     }
 
     if (num1 !== undefined && num2 !== undefined) {
         operate();
-    } else {
-        userInput = "";
-        textBox.textContent = "";
-        
+    } else if (num1 !== undefined && result !== undefined) {
+        num2 = result;
+        operate();
     }
+
+    userInput = "";
+    textBox.textContent = "";
     return operator = "/";
-    //result = num1 / num2;
 }
 
 const textBox = document.querySelector(".userInput");
@@ -125,15 +152,15 @@ input.forEach(button => {
     button.addEventListener("click", (e) => {
     console.log(button.id);
     
-    
     // if (userInput.Contains(".")) {
     //     return;
     // }
-    
 
     if (userInput.length < 16) {
         userInput += button.id
     }
+
+
     // clear this somehow and somewhere. 
 
     textBox.textContent = userInput;
@@ -153,4 +180,4 @@ const multiplyButton = document.querySelector("#multiply");
 multiplyButton.addEventListener("click", multiply);
 
 const equalsButton = document.querySelector("#equals");
-equalsButton.addEventListener("click", operate)
+equalsButton.addEventListener("click", operate);
